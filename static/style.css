@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+/* Background */
+body {
+    font-family: "Poppins", sans-serif;
+    background: #cfeeff;
+    color: #333;
+    padding: 40px;
+    min-height: 100vh;
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-family: "Playfair Display", serif;
+    font-size: 56px;
+    letter-spacing: 2px;
+    color: #fffeed;
+}
+
+/* Form */
+.form {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+/* Inputs */
+input {
+    padding: 12px 18px;
+    width: 220px;
+    border-radius: 999px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #444;
+}
+
+/* First input */
+#title {
+    background: #fff9b0;
+}
+
+/* Second input */
+#url {
+    background: #ffb6c9;
+}
+
+/* Add (+) button */
+button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: #a8bf8f;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* List */
+ul {
+    max-width: 520px;
+    margin: auto;
+    list-style: none;
+    padding: 0;
+}
+
+/* Link pill */
+li {
+    background: #cab2e0;
+    padding: 10px 20px;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Link text */
+li a {
+    color: #5a4a7a;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Delete (X) button */
+li button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #d98c84;
+    color: white;
+    font-size: 16px;
+    padding: 0;
+}
+
+li button:hover {
+    background: #c6766f;
+}

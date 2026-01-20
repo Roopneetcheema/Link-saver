@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Link Saver</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>LINKS</h1>
+
+<div class="form">
+    <input type="text" id="title" placeholder="Website name">
+    <input type="text" id="url" placeholder="Website URL">
+    <button onclick="addLink()">+</button>
+</div>
+
+<ul id="linkList"></ul>
+
+<script>
+async function loadLinks() {
+    const res = await fetch("/links");
+    const links = await res.json();
+
+    const list = document.getElementById("linkList");
+    list.innerHTML = "";
+
+    links.forEach((link, index) => {
+        list.innerHTML += `
+            <li>
+                <a href="${link.url}" target="_blank">${link.title}</a>
+                <button onclick="deleteLink(${index})">X</button>
+            </li>
+        `;
+    });
+}
+
+async function addLink() {
+    const titleInput = document.getElementById("title");
+    const urlInput = document.getElementById("url");
+
+    const title = titleInput.value.trim();
+    const url = urlInput.value.trim();
+
+    if (title && url) {
+        await fetch("/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, url })
+        });
+
+        titleInput.value = "";
+        urlInput.value = "";
+
+        loadLinks();
+    }
+}
+
+
+async function deleteLink(index) {
+    await fetch("/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ index })
+    });
+
+    loadLinks();
+}
+
+loadLinks();
+</script>
+
+</body>
+</html>
