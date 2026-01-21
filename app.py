@@ -4,7 +4,9 @@ import os
 
 app = Flask(__name__)
 
-DATA_FILE = "links.json"
+# Absolute path (IMPORTANT for hosting)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_FILE = os.path.join(BASE_DIR, "links.json")
 
 # Create file if it doesn't exist
 if not os.path.exists(DATA_FILE):
@@ -36,8 +38,8 @@ def get_links():
 def add_link():
     data = load_links()
     new_link = {
-        "title": request.json["title"],
-        "url": request.json["url"]
+        "title": request.json.get("title"),
+        "url": request.json.get("url")
     }
     data.append(new_link)
     save_links(data)
@@ -46,12 +48,16 @@ def add_link():
 
 @app.route("/delete", methods=["POST"])
 def delete_link():
-    index = request.json["index"]
+    index = request.json.get("index")
     data = load_links()
-    data.pop(index)
-    save_links(data)
-    return jsonify({"message": "Link deleted"})
+
+    if 0 <= index < len(data):
+        data.pop(index)
+        save_links(data)
+        return jsonify({"message": "Link deleted"})
+    else:
+        return jsonify({"error": "Invalid index"}), 400
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
